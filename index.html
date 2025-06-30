@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dr. Bolg's Journal</title>
+  <meta charset="UTF-8">
+  <title>Dr Bolg's Journal</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
       background-color: #0e0e0e;
       font-family: 'Georgia', serif;
       display: flex;
@@ -19,61 +19,86 @@
       position: relative;
       width: 475px;
       height: 669px;
-      background-image: url('70303800-0835-4fad-a339-720b52725c76.png');
+      background-image: url("2c974597-b9c6-47e8-a4ef-0dce1237f03c");
       background-size: cover;
       background-position: center;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
     }
 
-    .code-boxes {
+    .code-entry {
       position: absolute;
-      top: 215px; /* Raise this to move input fields up */
-      left: 85px; /* Adjust for left/right alignment */
+      top: 46%; /* Adjust this value to fine-tune placement */
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .code-boxes input {
-      width: 48px;
-      height: 48px;
+    .code-entry input {
+      width: 50px;
+      height: 50px;
       font-size: 24px;
       text-align: center;
-      border: 2px solid #555;
       background-color: #111;
-      color: #fff;
+      color: #ccc;
+      border: 2px solid #3a3a3a;
       border-radius: 4px;
     }
 
     .unlock-button {
       position: absolute;
-      top: 278px; /* Lower the button to match "ENTER" panel */
-      left: 165px;
-      width: 140px;
-      padding: 10px;
-      background-color: #1a1a1a;
-      color: #ccc;
-      border: 1px solid #333;
+      top: 56%; /* Adjust this value as needed */
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #1c1c1c;
+      color: #bdbdbd;
+      border: 1px solid #555;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 18px;
-      text-align: center;
-      transition: background-color 0.3s ease;
     }
 
     .unlock-button:hover {
-      background-color: #333;
-      color: #fff;
+      background-color: #292929;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="code-boxes">
-      <input type="text" maxlength="1">
-      <input type="text" maxlength="1">
-      <input type="text" maxlength="1">
-      <input type="text" maxlength="1">
+    <div class="code-entry">
+      <input type="text" maxlength="1" />
+      <input type="text" maxlength="1" />
+      <input type="text" maxlength="1" />
+      <input type="text" maxlength="1" />
     </div>
-    <div class="unlock-button">Unlock</div>
+    <button class="unlock-button" onclick="checkCode()">Unlock</button>
   </div>
+
+  <script>
+    function checkCode() {
+      const inputs = document.querySelectorAll('.code-entry input');
+      const enteredCode = Array.from(inputs).map(input => input.value).join('');
+      if (enteredCode === "1204") {
+        window.location.href = "page1.html"; // Update this once your journal page is ready
+      } else {
+        inputs.forEach(input => input.value = '');
+        document.querySelector('.container').classList.add('shake');
+        setTimeout(() => {
+          document.querySelector('.container').classList.remove('shake');
+        }, 500);
+      }
+    }
+
+    // Optional: auto-tab to next box
+    const inputs = document.querySelectorAll('.code-entry input');
+    inputs.forEach((input, idx) => {
+      input.addEventListener('input', () => {
+        if (input.value && idx < inputs.length - 1) {
+          inputs[idx + 1].focus();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
