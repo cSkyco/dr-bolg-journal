@@ -1,0 +1,84 @@
+# Re-run code due to kernel reset to regenerate the page2.html file
+
+# Creating the HTML code for page2.html as described
+html_code = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dr. Bolg's Journal - Chapter 2</title>
+    <style>
+        body {
+            background-color: #1b1b1b;
+            color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            padding: 40px 15%;
+        }
+        .journal-entry {
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            padding: 30px;
+            box-shadow: 0 0 10px #000;
+        }
+        .journal-date {
+            text-align: right;
+            font-style: italic;
+            margin-top: 40px;
+            color: #aaa;
+        }
+        .nav-links {
+            margin-top: 50px;
+            text-align: center;
+        }
+        .nav-links a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #333;
+            border: 1px solid #555;
+            margin: 0 10px;
+        }
+        .nav-links a:hover {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="journal-entry">
+        <h2>Chapter 2: Observations</h2>
+        <p>I have begun seeing patients in a more regular capacity now. Though my quarters are modest, the reputation of the guild has been enough to earn trust, or at least tolerance. The locals are fond of quick remedies — powders, elixirs, oils of every kind. They want ailments removed as one would wipe soot from glass.</p>
+
+        <p>But the body is not soot. Nor is it glass.</p>
+
+        <p>This week I treated a woman with tremors in her hands. She blamed stress, and I prescribed teas and tinctures, yes, but more than that — I watched her. Carefully. Her posture. The involuntary ticks. Her gaze shifting too quickly to hide something. I noted it all.</p>
+
+        <p>The tea will do little. But the act of giving it — that will help her. I’ve begun to suspect that <em>the ritual of medicine</em> is as important to the healing as the substance itself.</p>
+
+        <p>A boy came in two days later, high fever, cracked lips, rash along the ribs. His father wanted a poultice and salt bath. I gave it to him, of course. But I kept the stained linens and logged the texture of the rash in my ledger.</p>
+
+        <p>It is not that I do not care. But healing and <em>understanding</em> are two different practices. I cannot do both if I pretend they are the same.</p>
+
+        <p>I spend most evenings now going over the day's notes. Not for praise. Not even improvement. I’m simply... trying to see something. I don’t yet know what. But I think I’ll recognize it when it appears.</p>
+
+        <p>There is order in sickness — patterns beneath symptoms — if one looks long enough. I find that comforting.</p>
+
+        <p>I believe I always have.</p>
+
+        <div class="journal-date">— 135 BDP</div>
+    </div>
+
+    <div class="nav-links">
+        <a href="page1.html">Previous</a>
+        <a href="page3.html">Next</a>
+    </div>
+</body>
+</html>
+"""
+
+# Save this to a downloadable file
+file_path = "/mnt/data/page2.html"
+with open(file_path, "w", encoding="utf-8") as file:
+    file.write(html_code)
+
+file_path
