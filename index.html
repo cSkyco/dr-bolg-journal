@@ -3,107 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dr. Bolg’s Journal</title>
+  <title>Dr. Bolg's Journal</title>
   <style>
     body {
       margin: 0;
-      background-color: #111;
+      background-color: #0e0e0e;
+      font-family: 'Georgia', serif;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      font-family: 'Georgia', serif;
-      color: white;
     }
 
-    .journal-container {
+    .container {
       position: relative;
-      width: 400px;
-      height: 600px;
-      background: url('70303800-0835-4fad-a339-720b52725c76.png') no-repeat center center;
+      width: 452px;
+      height: 663px;
+      background-image: url('70303800-0835-4fad-a339-720b52725c76.png');
       background-size: cover;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      padding-bottom: 50px;
+      background-position: center;
     }
 
-    .code-inputs {
+    .code-boxes {
+      position: absolute;
+      top: 240px; /* Adjust this value if it's slightly off */
+      left: 72px; /* Adjust this value too if needed */
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
     }
 
-    input[type="text"] {
+    .code-boxes input {
       width: 50px;
       height: 50px;
       font-size: 24px;
       text-align: center;
-      border: 2px solid #ccc;
+      border: 2px solid #444;
+      background-color: #111;
+      color: #fff;
       border-radius: 4px;
-      background: #111;
-      color: white;
     }
 
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
+    .unlock-button {
+      position: absolute;
+      top: 310px; /* This lines up with the image's ENTER button */
+      left: 142px;
+      width: 150px;
+      padding: 10px;
       background-color: #222;
-      color: #eee;
-      border: 1px solid #555;
+      color: #ccc;
+      border: 1px solid #333;
       border-radius: 4px;
+      cursor: pointer;
+      font-size: 18px;
+      text-align: center;
     }
 
-    .shake {
-      animation: shake 0.3s;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
+    .unlock-button:hover {
+      background-color: #333;
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <div class="journal-container" id="container">
-    <div class="code-inputs">
-      <input type="text" maxlength="1" id="digit1" />
-      <input type="text" maxlength="1" id="digit2" />
-      <input type="text" maxlength="1" id="digit3" />
-      <input type="text" maxlength="1" id="digit4" />
+  <div class="container">
+    <div class="code-boxes">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
+      <input type="text" maxlength="1">
     </div>
-    <button onclick="checkCode()">Unlock</button>
+    <div class="unlock-button">Unlock</div>
   </div>
-
-  <script>
-    function checkCode() {
-      const d1 = document.getElementById('digit1').value;
-      const d2 = document.getElementById('digit2').value;
-      const d3 = document.getElementById('digit3').value;
-      const d4 = document.getElementById('digit4').value;
-
-      const code = d1 + d2 + d3 + d4;
-      const container = document.getElementById('container');
-
-      if (code === '1204') {
-        window.location.href = 'page1.html'; // This is the journal page you'll build next
-      } else {
-        container.classList.add('shake');
-        setTimeout(() => container.classList.remove('shake'), 300);
-        document.getElementById('digit1').value = '';
-        document.getElementById('digit2').value = '';
-        document.getElementById('digit3').value = '';
-        document.getElementById('digit4').value = '';
-        document.getElementById('digit1').focus();
-      }
-    }
-  </script>
 </body>
 </html>
