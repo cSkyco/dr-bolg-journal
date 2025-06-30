@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restricted Access</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0f0f0f;
+      color: #e0e0e0;
+      font-family: 'Georgia', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .code-container {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      width: 50px;
+      height: 50px;
+      font-size: 2rem;
+      text-align: center;
+      background-color: #222;
+      color: #e0e0e0;
+      border: 2px solid #444;
+      border-radius: 4px;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      border-color: #888;
+    }
+
+    .error-shake {
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Enter Access Code</h1>
+  <div class="code-container">
+    <input type="text" maxlength="1" id="digit1" />
+    <input type="text" maxlength="1" id="digit2" />
+    <input type="text" maxlength="1" id="digit3" />
+    <input type="text" maxlength="1" id="digit4" />
+  </div>
+
+  <script>
+    const correctCode = ['1', '2', '0', '4'];
+
+    const inputs = [
+      document.getElementById('digit1'),
+      document.getElementById('digit2'),
+      document.getElementById('digit3'),
+      document.getElementById('digit4'),
+    ];
+
+    inputs.forEach((input, idx) => {
+      input.addEventListener('input', () => {
+        if (input.value.length === 1 && idx < 3) {
+          inputs[idx + 1].focus();
+        }
+        checkCode();
+      });
+    });
+
+    function checkCode() {
+      const entered = inputs.map(input => input.value);
+      if (entered.every((val, i) => val === correctCode[i])) {
+        window.location.href = "journal1.html";
+      } else if (entered.every(val => val.length === 1)) {
+        document.querySelector('.code-container').classList.add('error-shake');
+        setTimeout(() => {
+          document.querySelector('.code-container').classList.remove('error-shake');
+          inputs.forEach(input => input.value = '');
+          inputs[0].focus();
+        }, 300);
+      }
+    }
+  </script>
+</body>
+</html>
