@@ -2,213 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restricted Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dr. Bolg's Journal</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #0f0f0f;
-      color: #e0e0e0;
+      background-color: #0b0b0b;
       font-family: 'Georgia', serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+    .container {
+      position: relative;
+      width: 450px;
+      height: 700px;
+      background: url('journal.png') no-repeat center center;
+      background-size: cover;
+      box-shadow: 0 0 30px rgba(0,0,0,0.7);
+      border-radius: 8px;
     }
 
-    .code-container {
+    .code-inputs {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       display: flex;
-      gap: 10px;
+      gap: 12px;
     }
 
-    input[type="text"] {
+    .code-inputs input {
       width: 50px;
       height: 50px;
-      font-size: 2rem;
+      font-size: 24px;
       text-align: center;
-      background-color: #222;
-      color: #e0e0e0;
-      border: 2px solid #444;
-      border-radius: 4px;
-      outline: none;
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px solid #333;
+      border-radius: 6px;
     }
 
-    input[type="text"]:focus {
-      border-color: #888;
+    .submit-button {
+      position: absolute;
+      top: 62%;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #2b2b2b;
+      color: #eee;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
     }
 
-    .error-shake {
+    .shake {
       animation: shake 0.3s;
     }
 
     @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
+      0% { transform: translate(-50%, -50%) translateX(0px); }
+      25% { transform: translate(-50%, -50%) translateX(-10px); }
+      50% { transform: translate(-50%, -50%) translateX(10px); }
+      75% { transform: translate(-50%, -50%) translateX(-10px); }
+      100% { transform: translate(-50%, -50%) translateX(0px); }
     }
   </style>
 </head>
 <body>
-  <style>
-  body {
-    background-color: #121212;
-    font-family: 'Georgia', serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-
-  .journal-container {
-    width: 500px;
-    height: 700px;
-    background-image: url('70303800-0835-4fad-a339-720b52725c76.png');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    box-shadow: 0 0 30px rgba(0,0,0,0.6);
-  }
-
-  .code-inputs {
-    position: absolute;
-    top: 60%; /* Position lower if needed */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    gap: 12px;
-  }
-
-  .code-inputs input {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    text-align: center;
-    background: rgba(255,255,255,0.85);
-    border: 2px solid #444;
-    border-radius: 6px;
-  }
-
-  .submit-button {
-    position: absolute;
-    top: 72%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    font-size: 16px;
-    background: #2b2b2b;
-    color: #eee;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-
-  .submit-button:hover {
-    background: #444;
-  }
-</style>
-
-<div class="journal-container">
-  <form onsubmit="return checkCode(event)">
-    <div class="code-inputs">
-      <input type="text" maxlength="1" id="digit1">
-      <input type="text" maxlength="1" id="digit2">
-      <input type="text" maxlength="1" id="digit3">
-      <input type="text" maxlength="1" id="digit4">
+  <div class="container">
+    <div class="code-inputs" id="codeBox">
+      <input maxlength="1" />
+      <input maxlength="1" />
+      <input maxlength="1" />
+      <input maxlength="1" />
     </div>
-    <button type="submit" class="submit-button">Unlock</button>
-  </form>
-</div>
-
-<script>
-  function checkCode(event) {
-    event.preventDefault();
-    const d1 = document.getElementById("digit1").value;
-    const d2 = document.getElementById("digit2").value;
-    const d3 = document.getElementById("digit3").value;
-    const d4 = document.getElementById("digit4").value;
-    const code = d1 + d2 + d3 + d4;
-
-    if (code === "1204") {
-      window.location.href = "chapter1.html"; // Replace with your real journal page
-    } else {
-      // Shake effect (optional)
-      const inputs = document.querySelector(".code-inputs");
-      inputs.style.animation = "shake 0.3s";
-      setTimeout(() => {
-        inputs.style.animation = "";
-      }, 300);
-
-      // Clear inputs
-      document.getElementById("digit1").value = "";
-      document.getElementById("digit2").value = "";
-      document.getElementById("digit3").value = "";
-      document.getElementById("digit4").value = "";
-    }
-  }
-</script>
-
-<style>
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-</style>
-
-  <h1>Enter Access Code</h1>
-  <div class="code-container">
-    <input type="text" maxlength="1" id="digit1" />
-    <input type="text" maxlength="1" id="digit2" />
-    <input type="text" maxlength="1" id="digit3" />
-    <input type="text" maxlength="1" id="digit4" />
+    <button class="submit-button" onclick="checkCode()">Unlock</button>
   </div>
 
   <script>
-    const correctCode = ['1', '2', '0', '4'];
-
-    const inputs = [
-      document.getElementById('digit1'),
-      document.getElementById('digit2'),
-      document.getElementById('digit3'),
-      document.getElementById('digit4'),
-    ];
-
-    inputs.forEach((input, idx) => {
-      input.addEventListener('input', () => {
-        if (input.value.length === 1 && idx < 3) {
-          inputs[idx + 1].focus();
-        }
-        checkCode();
-      });
-    });
-
     function checkCode() {
-      const entered = inputs.map(input => input.value);
-      if (entered.every((val, i) => val === correctCode[i])) {
-        window.location.href = "journal1.html";
-      } else if (entered.every(val => val.length === 1)) {
-        document.querySelector('.code-container').classList.add('error-shake');
+      const inputs = document.querySelectorAll('.code-inputs input');
+      const code = Array.from(inputs).map(input => input.value).join('');
+
+      if (code === '1204') {
+        window.location.href = 'chapter1.html'; // Replace with real path
+      } else {
+        const box = document.getElementById('codeBox');
+        box.classList.add('shake');
         setTimeout(() => {
-          document.querySelector('.code-container').classList.remove('error-shake');
-          inputs.forEach(input => input.value = '');
-          inputs[0].focus();
+          box.classList.remove('shake');
         }, 300);
+        inputs.forEach(input => input.value = '');
+        inputs[0].focus();
       }
     }
+
+    // Auto focus next input
+    document.querySelectorAll('.code-inputs input').forEach((input, idx, arr) => {
+      input.addEventListener('input', () => {
+        if (input.value && idx < arr.length - 1) arr[idx + 1].focus();
+      });
+    });
   </script>
 </body>
 </html>
